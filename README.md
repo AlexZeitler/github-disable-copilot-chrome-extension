@@ -1,4 +1,4 @@
-# github-disable-copilot-chrome-extension
+# Disable GitHub Copilot
 
 A Chrome extension that hides the Copilot entry points on github.com.
 

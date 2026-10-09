@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "GitHub Disable Copilot",
+  "name": "Disable GitHub Copilot",
   "version": "0.1.0",
   "description": "Hides the Copilot entry points on github.com.",
   "content_scripts": [
