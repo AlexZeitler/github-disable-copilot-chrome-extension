@@ -1,0 +1,68 @@
+/*
+ * Hides the entry points GitHub offers for Copilot. Content that Copilot
+ * produced (review comments, pull requests, requested reviews) stays visible.
+ *
+ * Selector rules:
+ * - Never match "copilot" as a substring of an href. Repository names may
+ *   contain it, e.g. /owner/github-disable-copilot-chrome-extension.
+ * - GitHub appends a hash to CSS module class names. Match the stable prefix
+ *   with [class*="Name-module__part"], never the full class.
+ * - Never hide <copilot-mentions-hint>. It wraps the comment field.
+ */
+
+/* Header: chat link, "Open Copilot…" menu, agents panel */
+[class*="CopilotItems-module__Wrapper"],
+#global-copilot-agent-button,
+
+/* Menu entries: side navigation, quick search, "Create new…", user menu */
+li:has(> a[data-testid="side-nav-menu-item-COPILOT"]),
+li:has(> a[href="/copilot"]),
+li:has(> a[href^="/copilot/"]),
+li:has(> a[href="/settings/copilot"]),
+
+/* Dashboard: chat input above the feed */
+.copilotPreview__container,
+
+/* Repository: "Agents" tab */
+li:has(> a[data-tab-item="agents"]),
+
+/* Icon-only buttons, e.g. "Ask Copilot about this repository" */
+button[data-component="IconButton"]:has(> svg.octicon-copilot),
+
+/* File view: "Ask Copilot about this file" and its menu */
+#blob-view-header-copilot-icon,
+[data-testid="copilot-ask-menu"],
+
+/* Issue: "Open in GitHub Copilot app", Copilot in the assignee picker */
+li:has(img[src*="/assets/github-copilot-app-"]),
+li[role="option"]:has([data-testid="copilot-avatar"]),
+
+/* Pull request: banners */
+#copilot-code-review-limits-banner,
+.js-copilot-summary-banner-container,
+react-partial[partial-name="copilot-summary-banner"],
+react-partial[partial-name="copilot-quota-banner-partial"],
+
+/* Pull request: "Mention @copilot in a comment" hint */
+.pull-discussion-timeline div.Stack.border:has(> .StackItem svg.octicon-copilot),
+
+/* Comment field: "Mention Copilot" in the toolbar and in its overflow menu */
+react-partial[partial-name="copilot-markdown-toolbar-button"],
+.ActionBar-item:has(> [id^="copilot-md-menu-anchor-"]),
+li[data-action="click:action-bar#menuItemClick"]:has(svg.octicon-copilot),
+
+/* Pull request: Copilot as suggested reviewer. A requested review has no
+   .js-suggested-reviewer button and stays visible. */
+.sidebar-assignee div:has(> [data-hovercard-type="copilot"]):has(.js-suggested-reviewer),
+
+/* Pull request diff: "Ask about this diff" */
+[data-testid="copilot-diff-explain-button"],
+
+/* New repository: "Jumpstart your project with Copilot" */
+li[class*="ModernCreateForm-module__timelineItem"]:has(h2[class*="ModernCreateForm-module__promptTimelineHeading"]),
+
+/* Settings navigation: "Copilot" section in user and repository settings */
+li.ActionListItem--hasSubItem:has(li[data-item-id^="copilot"]),
+li.ActionListItem--hasSubItem:has(a[href*="/settings/copilot/"]) {
+  display: none !important;
+}

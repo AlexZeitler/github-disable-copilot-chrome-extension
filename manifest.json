@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Disable Copilot",
+  "version": "0.1.0",
+  "description": "Hides the Copilot entry points on github.com.",
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "css": ["hide-copilot.css"],
+      "run_at": "document_start"
+    }
+  ]
+}
