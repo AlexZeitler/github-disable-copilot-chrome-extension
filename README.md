@@ -1,0 +1,1 @@
+# github-disable-copilot-chrome-extension
